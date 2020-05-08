@@ -1,29 +1,37 @@
 <template>
   <div class="navbar">
-    <hamburger :is-active="sidebar.opened" class="hamburger-container" @toggleClick="toggleSideBar" />
-
-    <breadcrumb class="breadcrumb-container" />
-
+    <div class="hamburger-container">logo position</div>
+    <div class="menu-container">
+      <!-- <el-row :gutter="10" type="flex">
+        <el-col :xs="0" :sm="3" :md="4" :lg="3" :xl="1" />
+        <el-col :xs="8" :sm="7" :md="4" :lg="3" :xl="1"><div class="menu-container-item">主页</div></el-col>
+        <el-col :xs="8" :sm="7" :md="4" :lg="3" :xl="1"><div class="menu-container-item">比赛</div></el-col>
+        <el-col :xs="8" :sm="7" :md="4" :lg="3" :xl="1"><div class="menu-container-item">题目集</div></el-col>
+      </el-row> -->
+      <el-menu :default-active="activeIndex" class="el-menu-demo" mode="horizontal" :router="true">
+        <el-menu-item index="/"><div class="menu-container-item">主页</div></el-menu-item>
+        <el-menu-item index="/example"><div class="menu-container-item">比赛</div></el-menu-item>
+        <el-menu-item index="/form"><div class="menu-container-item">题目集</div></el-menu-item>
+      </el-menu>
+    </div>
     <div class="right-menu">
       <el-dropdown class="avatar-container" trigger="click">
         <div class="avatar-wrapper">
-          <img :src="avatar+'?imageView2/1/w/80/h/80'" class="user-avatar">
-          <i class="el-icon-caret-bottom" />
+          <div>
+            <el-avatar> user </el-avatar>
+          </div>
         </div>
         <el-dropdown-menu slot="dropdown" class="user-dropdown">
           <router-link to="/">
             <el-dropdown-item>
-              Home
+              主页
             </el-dropdown-item>
           </router-link>
-          <a target="_blank" href="https://github.com/PanJiaChen/vue-admin-template/">
-            <el-dropdown-item>Github</el-dropdown-item>
-          </a>
-          <a target="_blank" href="https://panjiachen.github.io/vue-element-admin-site/#/">
-            <el-dropdown-item>Docs</el-dropdown-item>
+          <a target="_blank" href="">
+            <el-dropdown-item>个人信息</el-dropdown-item>
           </a>
           <el-dropdown-item divided @click.native="logout">
-            <span style="display:block;">Log Out</span>
+            <span style="display:block;">退出</span>
           </el-dropdown-item>
         </el-dropdown-menu>
       </el-dropdown>
@@ -33,19 +41,10 @@
 
 <script>
 import { mapGetters } from 'vuex'
-import Breadcrumb from '@/components/Breadcrumb'
-import Hamburger from '@/components/Hamburger'
 
 export default {
-  components: {
-    Breadcrumb,
-    Hamburger
-  },
   computed: {
-    ...mapGetters([
-      'sidebar',
-      'avatar'
-    ])
+    ...mapGetters(['sidebar', 'avatar'])
   },
   methods: {
     toggleSideBar() {
@@ -61,25 +60,32 @@ export default {
 
 <style lang="scss" scoped>
 .navbar {
-  height: 50px;
+  height: 60px;
   overflow: hidden;
   position: relative;
   background: #fff;
-  box-shadow: 0 1px 4px rgba(0,21,41,.08);
+  box-shadow: 0 1px 4px rgba(0, 21, 41, 0.08);
 
   .hamburger-container {
-    line-height: 46px;
+    line-height: 56px;
     height: 100%;
     float: left;
-    cursor: pointer;
-    transition: background .3s;
-    -webkit-tap-highlight-color:transparent;
-
-    &:hover {
-      background: rgba(0, 0, 0, .025)
-    }
+    margin-left: 10px;
   }
-
+.menu-container {
+    line-height: 56px;
+    height: 100%;
+    text-align: center;
+    float: left;
+    margin-left: 200px;
+    width: calc(100% - 400px);
+  }
+.menu-container-item {
+  cursor: pointer;
+  border-radius: 4px;
+  width: 100px;
+  color: #6c7293;
+}
   .breadcrumb-container {
     float: left;
   }
@@ -87,7 +93,7 @@ export default {
   .right-menu {
     float: right;
     height: 100%;
-    line-height: 50px;
+    line-height: 60px;
 
     &:focus {
       outline: none;
@@ -103,10 +109,10 @@ export default {
 
       &.hover-effect {
         cursor: pointer;
-        transition: background .3s;
+        transition: background 0.3s;
 
         &:hover {
-          background: rgba(0, 0, 0, .025)
+          background: rgba(0, 0, 0, 0.025);
         }
       }
     }
